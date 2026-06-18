@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CT060-3-3-EMTECH — Combined Study Notes (Ch 7, 8, 12)</title>
+<style>
+  :root {
+    --color-background-primary: #ffffff;
+    --color-background-secondary: #f5f5f3;
+    --color-text-primary: #1a1a18;
+    --color-text-secondary: #5c5c5a;
+    --color-text-tertiary: #8a8a88;
+    --color-border-tertiary: #e0deda;
+    --color-border-secondary: #cbc9c4;
+    --color-border-primary: #a8a6a0;
+    --color-border-info: #378add;
+    --border-radius-lg: 10px;
+    --border-radius-md: 6px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #f5f5f3; color: var(--color-text-primary);
+    font-size: 14px; line-height: 1.5;
+  }
+  .sidenav {
+    position: fixed; top: 0; left: 0; width: 210px; height: 100vh;
+    background: var(--color-background-primary);
+    border-right: 0.5px solid var(--color-border-tertiary);
+    overflow-y: auto; padding: 16px 0; z-index: 100;
+  }
+  .sidenav-title {
+    font-size: 10px; font-weight: 600; letter-spacing: 0.1em;
+    color: var(--color-text-tertiary); padding: 0 14px 10px; text-transform: uppercase;
+  }
+  .sidenav-chap {
+    font-size: 9px; font-weight: 700; letter-spacing: 0.1em;
+    color: #378add; padding: 14px 14px 4px; text-transform: uppercase;
+  }
+  .sidenav-chap:first-of-type { padding-top: 4px; }
+  .sidenav a {
+    display: block; padding: 6px 14px; color: var(--color-text-secondary);
+    text-decoration: none; font-size: 12px; font-weight: 500;
+    border-left: 2px solid transparent; transition: all .12s;
+  }
+  .sidenav a:hover { color: var(--color-text-primary); background: var(--color-background-secondary); }
+  .sidenav a.active { color: #0C447C; border-left-color: #378add; background: #E6F1FB; }
+  .main { margin-left: 210px; padding: 32px 40px; max-width: 860px; }
+  .cover {
+    background: var(--color-text-primary); border-radius: 14px;
+    padding: 40px 36px; margin-bottom: 40px; text-align: center;
+  }
+  .cover-tag { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; color: #9FE1CB; text-transform: uppercase; margin-bottom: 12px; }
+  .cover-title { font-size: 28px; font-weight: 700; color: #fff; line-height: 1.2; margin-bottom: 6px; }
+  .cover-sub { font-size: 13px; color: #9FE1CB; margin-bottom: 20px; }
+  .cover-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; max-width: 620px; margin: 0 auto; text-align: left; }
+  .cover-item { font-size: 11px; color: #B4B2A9; padding: 5px 10px; background: rgba(255,255,255,.06); border-radius: 6px; }
+  .cover-item b { color: #9FE1CB; margin-right: 5px; }
+
+  /* ── Chapter divider banner ── */
+  .chap-divider {
+    background: linear-gradient(135deg, #0C447C, #1a1a18);
+    border-radius: 14px; padding: 26px 32px; margin: 56px 0 36px;
+    text-align: center;
+  }
+  .chap-divider:first-of-type { margin-top: 0; }
+  .chap-divider-tag { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; color: #9FE1CB; text-transform: uppercase; margin-bottom: 8px; }
+  .chap-divider-title { font-size: 22px; font-weight: 700; color: #fff; }
+
+  .lec-section { margin-bottom: 56px; scroll-margin-top: 20px; }
+  .lec-banner { background: var(--color-text-primary); border-radius: 12px; padding: 20px 24px; margin-bottom: 24px; }
+  .lec-banner-num { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 3px; opacity: .6; color: #fff; }
+  .lec-banner-title { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 3px; }
+  .lec-banner-sub { font-size: 11px; color: #9FE1CB; opacity: .8; }
+  .lec-1 .lec-banner-num { color: #60A5FA; }
+  .lec-2 .lec-banner-num { color: #34D399; }
+  .lec-3 .lec-banner-num { color: #A78BFA; }
+  .lec-4 .lec-banner-num { color: #FBBF24; }
+  .lec-5 .lec-banner-num { color: #FB7185; }
+  .lec-6 .lec-banner-num { color: #38BDF8; }
+  .sec { margin-bottom: 1.5rem; }
+  .sec-title {
+    font-size: 11px; font-weight: 600; color: var(--color-text-secondary);
+    text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 8px;
+  }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(148px, 1fr)); gap: 8px; }
+  .cards-2 { grid-template-columns: 1fr 1fr !important; }
+  .cards-3 { grid-template-columns: 1fr 1fr 1fr !important; }
+  .card {
+    background: var(--color-background-primary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-lg); padding: 0.75rem 1rem;
+  }
+  .card-head { font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 4px; }
+  .card-body { font-size: 12px; color: var(--color-text-secondary); line-height: 1.5; }
+  .tag { font-size: 10px; font-weight: 500; padding: 2px 7px; border-radius: 4px; margin-bottom: 5px; display: inline-block; }
+  .tag-a { background: #B5D4F4; color: #0C447C; }
+  .tag-b { background: #9FE1CB; color: #085041; }
+  .tag-c { background: #CECBF6; color: #3C3489; }
+  .tag-d { background: #FAC775; color: #633806; }
+  .tag-e { background: #F5C4B3; color: #712B13; }
+  .tag-f { background: #C6EDB2; color: #27500A; }
+  .pill { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 99px; margin: 2px 2px 2px 0; }
+  .pill-blue { background: #E6F1FB; color: #0C447C; }
+  .pill-teal { background: #E1F5EE; color: #085041; }
+  .pill-purple { background: #EEEDFE; color: #3C3489; }
+  .pill-amber { background: #FAEEDA; color: #633806; }
+  .pill-coral { background: #FAECE7; color: #712B13; }
+  .pill-green { background: #EAF3DE; color: #27500A; }
+  .pill-sky { background: #E0F2FE; color: #075985; }
+  .divider { border: none; border-top: 0.5px solid var(--color-border-tertiary); margin: 1.2rem 0; }
+  .process-row { display: flex; gap: 6px; margin-bottom: 6px; align-items: flex-start; }
+  .process-num {
+    width: 22px; height: 22px; border-radius: 50%; background: #E6F1FB; color: #0C447C;
+    font-size: 11px; font-weight: 500; display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .process-content { flex: 1; font-size: 12px; color: var(--color-text-secondary); line-height: 1.5; }
+  .process-title { font-weight: 500; color: var(--color-text-primary); }
+  .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .exam-note {
+    background: #FAEEDA; border: 0.5px solid #FAC775; border-radius: 8px; padding: 10px 14px;
+    font-size: 12px; color: #633806; line-height: 1.6; margin-top: 8px;
+  }
+  .exam-note::before { content: '★ Exam tip: '; font-weight: 700; }
+  .quote-block {
+    background: var(--color-background-secondary); border-left: 3px solid var(--color-border-primary);
+    border-radius: 0 8px 8px 0; padding: 10px 16px; font-size: 12px; font-style: italic;
+    color: var(--color-text-secondary); margin-top: 8px;
+  }
+  .quote-block b { font-style: normal; }
+  table.mini { width: 100%; border-collapse: collapse; font-size: 12px; }
+  table.mini th { background: #E6F1FB; color: #0C447C; text-align: left; padding: 6px 10px; font-weight: 600; font-size: 11px; }
+  table.mini td { padding: 7px 10px; color: var(--color-text-secondary); border-top: 0.5px solid var(--color-border-tertiary); vertical-align: top; }
+  table.mini tr:nth-child(even) td { background: var(--color-background-secondary); }
+  @media (max-width: 700px) {
+    .sidenav { display: none; }
+    .main { margin-left: 0; padding: 20px 16px; }
+    .cards-2, .cards-3, .compare-grid, .cover-grid { grid-template-columns: 1fr !important; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="sidenav">
+  <div class="sidenav-title">CT060-3-3-EMTECH</div>
+
+  <div class="sidenav-chap">Ch 7 — Tech Assessment</div>
+  <a href="#ch7-sec1">1 — Scoping</a>
+  <a href="#ch7-sec2">2 — Searching</a>
+  <a href="#ch7-sec3">3 — Evaluating</a>
+  <a href="#ch7-sec4">4 — Committing</a>
+  <a href="#ch7-sec5">5 — Strategy Making</a>
+
+  <div class="sidenav-chap">Ch 8 — Ethics &amp; Prof.</div>
+  <a href="#ch8-sec1">1 — Tech &amp; Ethics</a>
+  <a href="#ch8-sec2">2 — Ethical Principles</a>
+  <a href="#ch8-sec3">3 — Digital Privacy</a>
+  <a href="#ch8-sec4">4 — Accountability &amp; Trust</a>
+  <a href="#ch8-sec5">5 — Threats &amp; Challenges</a>
+
+  <div class="sidenav-chap">Ch 12 — Avoiding Pitfalls</div>
+  <a href="#ch12-sec1">1 — Common Traps</a>
+  <a href="#ch12-sec2">2 — Four Solutions</a>
+  <a href="#ch12-sec3">3 — Uncertain Future</a>
+  <a href="#ch12-sec4">4 — Scenario Planning</a>
+  <a href="#ch12-sec5">5 — Constructing Scenarios</a>
+  <a href="#ch12-sec6">6 — Why It Works &amp; Conclusion</a>
+</nav>
+
+<main class="main">
+
+<!-- MASTER COVER -->
+<div class="cover">
+  <div class="cover-tag">CT060-3-3-EMTECH · Combined Study Notes</div>
+  <div class="cover-title">Chapters 7, 8 &amp; 12</div>
+  <div class="cover-sub">Technology Assessment · Ethics &amp; Professionalism · Avoiding Pitfalls of Emerging Tech</div>
+  <div class="cover-grid">
+    <div class="cover-item"><b>Ch7</b>Scoping</div>
+    <div class="cover-item"><b>Ch7</b>Searching</div>
+    <div class="cover-item"><b>Ch7</b>Evaluating</div>
+    <div class="cover-item"><b>Ch7</b>Committing</div>
+    <div class="cover-item"><b>Ch7</b>Strategy Making</div>
+    <div class="cover-item"><b>Ch8</b>Tech &amp; Ethics</div>
+    <div class="cover-item"><b>Ch8</b>Ethical Principles</div>
+    <div class="cover-item"><b>Ch8</b>Digital Privacy</div>
+    <div class="cover-item"><b>Ch8</b>Accountability &amp; Trust</div>
+    <div class="cover-item"><b>Ch8</b>Threats &amp; Challenges</div>
+    <div class="cover-item"><b>Ch12</b>Common Traps</div>
+    <div class="cover-item"><b>Ch12</b>Four Solutions</div>
+    <div class="cover-item"><b>Ch12</b>Uncertain Future</div>
+    <div class="cover-item"><b>Ch12</b>Scenario Planning</div>
+    <div class="cover-item"><b>Ch12</b>Constructing Scenarios</div>
+    <div class="cover-item"><b>Ch12</b>Conclusion</div>
+  </div>
+</div>
+
+<div class="chap-divider">
+  <div class="chap-divider-tag">Chapter 7</div>
+  <div class="chap-divider-title">Technology Assessment &amp; Strategy Making</div>
+</div>
+
+<!-- ══════════════════════════════ SEC 1 — SCOPING ══ -->
+<section class="lec-section lec-1" id="ch7-sec1">
+<div class="lec-banner">
+  <div class="lec-banner-num">Step 1</div>
+  <div class="lec-banner-title">Scoping</div>
+  <div class="lec-banner-sub">Strategic Intent · Firm Capabilities</div>
+</div>
+<div style="padding: 0.5rem 0 0;">
+
+<div class="sec">
+  <div class="sec-title">What scoping does</div>
+  <div class="card"><div class="card-body">Establishes the boundaries of the assessment before any technology is evaluated. Technology cannot be considered in the abstract — it must answer a question or address a challenge. Where the firm looks for technology depends entirely on what it's looking for. <b style="font-weight:500">"If you don't have a target, you'll miss it every time."</b></div></div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">Two halves of scoping</div>
+  <div class="compare-grid">
+    <div class="card"><div class="tag tag-a">Strategic intent</div><div class="card-body">Assessed by the firm's strategic intent. Defines the target market and the potential threat or opportunity the technology represents. Tech assessment is only meaningful in the context of this intent.</div></div>
+    <div class="card"><div class="tag tag-b">Firm capabilities</div><div class="card-body">Assessed by the firm's core capabilities. Codifying technical capabilities is the starting point for the whole assessment.</div></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">Examples of strategic intent ← direct review Q</div>
+  <div class="cards">
+    <div class="card"><div class="card-head">British Airways</div><div class="card-body">Goal of becoming "The World's Favorite Airline."</div></div>
+    <div class="card"><div class="card-head">New business unit</div><div class="card-body">Meet this year's goal of launching a new $200 million business unit.</div></div>
+    <div class="card"><div class="card-head">Product shelf life</div><div class="card-body">Increase product shelf life.</div></div>
+    <div class="card"><div class="card-head">Production costs</div><div class="card-body">Lower production costs.</div></div>
+  </div>
+  <div class="quote-block">What new information systems could help British Airways become the world's favorite airline? — the strategic intent turned into a technology question.</div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">Core competence — what it could be</div>
+  <div class="cards cards-2">
+    <div class="card"><div class="card-body">Special technical capabilities leading to unique products.</div></div>
+    <div class="card"><div class="card-body">Ability to provide superior services.</div></div>
+    <div class="card"><div class="card-body">Capabilities for rapid product innovation and development.</div></div>
+    <div class="card"><div class="card-body">Particular capabilities yielding enduring cost advantages.</div></div>
+  </div>
+  <div class="exam-note">First-rate technology assessment can itself be a crucial core competence in today's economy.</div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">Key questions for firm capabilities</div>
+  <div class="card" style="padding:1rem;">
+    <div class="process-row"><div class="process-num">1</div><div class="process-content">Does the firm possess sufficient capabilities?</div></div>
+    <div class="process-row"><div class="process-num">2</div><div class="process-content">Will it have to acquire, develop, or create partnerships to attain specific capabilities for tech development and commercialization? <i>(may also require divesting existing capabilities.)</i></div></div>
+  </div>
+  <div style="margin-top:6px; font-size:11px; color:var(--color-text-tertiary);">Managing a creative technology process requires balancing the firm's capabilities &amp; constraints with its intellectual openness to new technologies and ambitions for growth.</div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">Key terms to know</div>
+  <div>
+    <span class="pill pill-blue">Strategic intent</span><span class="pill pill-blue">Core capabilities</span><span class="pill pill-blue">Target market</span><span class="pill pill-blue">Threat / opportunity</span><span class="pill pill-blue">Core competence</span><span class="pill pill-blue">Codifying capabilities</span>
+  </div>
+</div>
+
+</div>
+</section>
+
+<!-- ══════════════════════════════ SEC 2 — SEARCHING ══ -->
+<section class="lec-section lec-2" id="ch7-sec2">
+<div class="lec-banner">
+  <div class="lec-banner-num">Step 2</div>
+  <div class="lec-banner-title">Searching</div>
+  <div class="lec-banner-sub">Sensing Emergence · Strong &amp; Weak Signals · Knowledge Capture</div>
+</div>
+<div style="padding: 0.5rem 0 0;">
+
+<div class="sec">
+  <div class="sec-title">What searching does</div>
+  <div class="card"><div class="card-body">Determine the information and technology sources that need to be consistently reviewed for signs of technology change. Set up procedures and organizational arrangements to screen technologies. Search for signals of both emergent technology and its commercial viability.</div></div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">Sensing technological emergence ← exam favorite</div>
+  <div class="card"><div class="card-body">The challenge is recognizing momentum forming around a given technology. Leading technologies are recognized as emergent by their technological "following." Technology forecasting works by looking into the recent past for signals of momentum building behind a technology toward filling a market need.</div></div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">Strong vs weak signals ← direct review Q</div>
+  <div class="compare-grid">
+    <div class="card"><div class="tag tag-a">Strong signals</div><div class="card-body">Clearly reveal commercial investment in the candidate technology and signal its technical feasibility to serve target market needs.<br/><br/><b style="font-weight:500">Examples:</b> patent &amp; literature citations · competitor's actions.</div></div>
+    <div class="card"><div class="tag tag-c">Weak signals</div><div class="card-body">More subtle indicators that a discovery has commercial potential, that independent analysis has recognized this, and that a following has formed.<br/><br/><b style="font-weight:500">Examples:</b> confirmation within knowledge networks · competitive intelligence.</div></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">Knowledge &amp; information capture — why it matters</div>
+  <div class="cards">
+    <div class="card"><div class="card-body">Information gathered at the start may only be fully understood later on.</div></div>
+    <div class="card"><div class="card-body">Technologies continue to progress and develop over time.</div></div>
+    <div class="card"><div class="card-body">As the team grows or changes, compiled info brings new members up to speed fast.</div></div>
+    <div class="card"><div class="card-body">Internet &amp; corporate intranets create extraordinary capture opportunities.</div></div>
+  </div>
+  <div class="exam-note">The team's rationale for decisions should be explicitly described — this monitors progress and earns leadership support for new initiatives.</div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">Key terms to know</div>
+  <div>
+    <span class="pill pill-teal">Technology forecasting</span><span class="pill pill-teal">Technological following</span><span class="pill pill-teal">Strong signals</span><span class="pill pill-teal">Weak signals</span><span class="pill pill-teal">Patent citations</span><span class="pill pill-teal">Competitive intelligence</span><span class="pill pill-teal">Knowledge capture</span>
+  </div>
+</div>
+
+</div>
+</section>
+
+<!-- ══════════════════════════════ SEC 3 — EVALUATING ══ -->
+<section class="lec-section lec-3" id="ch7-sec3">
+<div class="lec-banner">
+  <div class="lec-banner-num">Step 3</div>
+  <div class="lec-banner-title">Evaluating</div>
+  <div class="lec-banner-sub">Ranking Criteria · Risk Profiling · Technology Plans</div>
+</div>
+<div style="padding: 0.5rem 0 0;">
+
+<div class="sec">
+  <div class="sec-title">What evaluating does</div>
+  <div class="card"><div class="card-body">Sorts through the set of possibilities defined during searching. Managers rank candidate technologies on a common set of financial &amp; organizational criteria. Technology positioning is achieved by weighting scores across these criteria — drafting the financial, competitive, and organizational impacts of the technologies analyzed.</div></div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">Ranking criteria</div>
+  <div class="cards cards-2">
+    <div class="card"><div class="tag tag-a">Financial analysis</div><div class="card-body">Projected returns, investment required, financial impact of the candidate technology.</div></div>
+    <div class="card"><div class="tag tag-d">Measures of risk</div><div class="card-body">Risk profiling — mapping risk against reward for each candidate technology.</div></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">Technology plans — what they map out</div>
+  <div class="card" style="padding:1rem;">
+    <div class="process-row"><div class="process-num">1</div><div class="process-content"><span class="process-title">Technology commercialization</span> — the path to bringing it to market.</div></div>
+    <div class="process-row"><div class="process-num">2</div><div class="process-content"><span class="process-title">Required investment</span> — how much and when.</div></div>
+    <div class="process-row"><div class="process-num">3</div><div class="process-content"><span class="process-title">Organizational implications</span> — what it means for structure and people.</div></div>
+    <div class="process-row"><div class="process-num">4</div><div class="process-content"><span class="process-title">Potential financial rewards</span> — the expected payoff.</div></div>
+  </div>
+  <div class="exam-note">A draft plan reveals outstanding questions that must be answered to reduce uncertainty. It describes technical &amp; market uncertainties and the timing of investments toward resolving each.</div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">Don't forget the rejects</div>
+  <div class="card"><div class="card-body">It's important to limit technology choices, but also to preserve a record of technologies that didn't make the grade — they may resurface as a future possible breakthrough.</div></div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">Key terms to know</div>
+  <div>
+    <span class="pill pill-amber">Financial analysis</span><span class="pill pill-amber">Risk profiling</span><span class="pill pill-amber">Weighting scores</span><span class="pill pill-amber">Technology plan</span><span class="pill pill-amber">Commercialization path</span><span class="pill pill-amber">Organizational implications</span>
+  </div>
+</div>
+
+</div>
+</section>
+
+<!-- ══════════════════════════════ SEC 4 — COMMITTING ══ -->
+<section class="lec-section lec-4" id="ch7-sec4">
+<div class="lec-banner">
+  <div class="lec-banner-num">Step 4</div>
+  <div class="lec-banner-title">Committing</div>
+  <div class="lec-banner-sub">Four Strategic Postures</div>
+</div>
+<div style="padding: 0.5rem 0 0;">
+
+<div class="sec">
+  <div class="sec-title">What committing does</div>
+  <div class="card"><div class="card-body">Four general forms of strategic commitment reflect four increasingly aggressive strategic postures or intentions. The right level depends on three factors.</div></div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">What determines the commitment level ← direct review Q</div>
+  <div class="cards cards-3">
+    <div class="card"><div class="card-head">Competitive imperative</div><div class="card-body">How urgent the pressure is to take action now.</div></div>
+    <div class="card"><div class="card-head">Risk / reward</div><div class="card-body">The risk-reward relationship of the technology &amp; its market.</div></div>
+    <div class="card"><div class="card-head">Emergence signals</div><div class="card-body">How strong the signals of the new technology's emergence are (ties back to Searching).</div></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">Key terms to know</div>
+  <div>
+    <span class="pill pill-coral">Strategic commitment</span><span class="pill pill-coral">Strategic posture</span><span class="pill pill-coral">Competitive imperative</span><span class="pill pill-coral">Risk-reward relationship</span>
+  </div>
+</div>
+
+</div>
+</section>
+
+<!-- ══════════════════════════════ SEC 5 — STRATEGY MAKING ══ -->
+<section class="lec-section lec-5" id="ch7-sec5">
+<div class="lec-banner">
+  <div class="lec-banner-num">Strategy Making</div>
+  <div class="lec-banner-title">Planning Under Uncertainty &amp; Disciplined Imagination</div>
+  <div class="lec-banner-sub">Art of Strategy · Discipline · Imagination · The Combination</div>
+</div>
+<div style="padding: 0.5rem 0 0;">
+
+<div class="sec">
+  <div class="sec-title">Planning under uncertainty</div>
+  <div class="card"><div class="card-body">Needs to be rethought in an environment of rapid change. High uncertainty is characteristic, and markets demand new solutions to new problems. Mechanical planning no longer works — firms must adjust strategies quickly and create new ones continually.</div></div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">The art of strategy making</div>
+  <div class="card"><div class="card-body">Strategy is an art, not a science — "a theory of success that has not yet been tested." The strategist must choose one among many competing strategies for the actual test; not all possible strategies can be validated by implementing each one. No amount of planning guarantees success, but it improves the odds. Past successful approaches remain an option for the future.</div></div>
+  <div class="quote-block">"A set of assumptions about markets, technology, and its dynamics, about a company's strengths and weaknesses, and about what the company gets paid for." <b>— Peter Drucker, on the "theory of business"</b></div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">Twin pillars of strategy ← direct review Q</div>
+  <div class="compare-grid">
+    <div class="card"><div class="tag tag-a">Discipline</div><div class="card-body">Consistent application of rules to evaluate a set of alternatives. Achieved by identifying patterns in market evolution and comparing them to similar markets.</div></div>
+    <div class="card"><div class="tag tag-c">Imagination</div><div class="card-body">Associated with synthesis, vision, foresight, creativity, intuition. A deliberate effort to generate and evaluate more options — "deliberate diversity" in how problems are defined and solutions generated.</div></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">Discipline — benefits &amp; limitations</div>
+  <div class="compare-grid">
+    <div class="card"><div class="tag tag-b">Benefits</div><div class="card-body">Linked to greater consensus among top managers · helps managers be more judicious · identifies and corrects "avoidable errors" · more exhaustive/inclusive decision process.</div></div>
+    <div class="card"><div class="tag tag-e">Limitations</div><div class="card-body">Analysis rather than synthesis · selection at the expense of generation · extrapolation from the past · overconfidence in the power of analysis.</div></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">Imagination — the process</div>
+  <div class="cards">
+    <div class="card"><div class="card-body">Alternatives must be varied and distinct, not mere variations on a theme.</div></div>
+    <div class="card"><div class="card-body">Use multiple cognitive frames to examine and define the problem.</div></div>
+    <div class="card"><div class="card-body">Diversity in the rules used to select among alternatives.</div></div>
+    <div class="card"><div class="card-body">"Future-oriented" — imagine the destination and work backward.</div></div>
+    <div class="card"><div class="card-body">Maintain a portfolio of options as "launching pads" to adapt quickly.</div></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">Imagination — benefits &amp; limitations</div>
+  <div class="compare-grid">
+    <div class="card"><div class="tag tag-b">Benefits</div><div class="card-body">Adaptive thinking, persistent "thinking out-of-the-box" · abandons the "hierarchy of experience" for a "hierarchy of imagination."</div></div>
+    <div class="card"><div class="tag tag-e">Limitations</div><div class="card-body">Chaos · losing touch with reality · undervaluing the past · diluting individual creativity · slowing the process.</div></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">Disciplined imagination — the combination</div>
+  <div class="card"><div class="card-body">Combination rather than extreme emphasis on either pillar. Capitalizes on the strength of each while avoiding their weaknesses. Imagination generates diverse options and encourages creative thinking; discipline grounds the process in reality so options get evaluated, developed, and implemented.</div></div>
+  <div class="quote-block">"Movies are a make believe business that feeds on imagination. When you are creating them, you are in the fantasy world. Without some kind of discipline, however, it is too easy to get distracted." <b>— George Lucas</b></div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">Practicing disciplined imagination</div>
+  <div class="card" style="padding:1rem;">
+    <div class="process-row"><div class="process-num">1</div><div class="process-content">Generate imaginative options.</div></div>
+    <div class="process-row"><div class="process-num">2</div><div class="process-content">Evaluate the options consistently.</div></div>
+    <div class="process-row"><div class="process-num">3</div><div class="process-content">Alternate periods of imaginative idea generation with periods of disciplined idea evaluation.</div></div>
+  </div>
+  <div style="margin-top:6px; font-size:11px; color:var(--color-text-tertiary);">Sometimes requires a more complex route: dismount the formal present system, build a new process from scratch — new space, new rules, new lenses, challenge the orthodoxies.</div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">Conclusions</div>
+  <div class="cards">
+    <div class="card"><div class="card-body">A rigorous, iterative process for assessing technologies is crucial — mistakes carry expensive strategic and financial consequences.</div></div>
+    <div class="card"><div class="card-body">High uncertainty is a defining characteristic of technology assessment.</div></div>
+    <div class="card"><div class="card-body">Disciplined imagination is common across artists, scientists, theorists, and strategists venturing into the unknown.</div></div>
+    <div class="card"><div class="card-body">Firms should develop both capabilities, but need not deploy them simultaneously.</div></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">Key terms to know</div>
+  <div>
+    <span class="pill pill-purple">Theory of business</span><span class="pill pill-purple">Discipline</span><span class="pill pill-purple">Imagination</span><span class="pill pill-purple">Disciplined imagination</span><span class="pill pill-purple">Hierarchy of imagination</span><span class="pill pill-purple">Strategic posture</span>
+  </div>
+  <div class="exam-note">Four-step process = Scoping → Searching → Evaluating → Committing. Strong signals (patents, competitor actions) vs weak signals (knowledge network confirmation, competitive intel). Twin pillars = Discipline + Imagination, combined as "disciplined imagination."</div>
+</div>
+
+</div>
+</section><div class="chap-divider">
+  <div class="chap-divider-tag">Chapter 8</div>
+  <div class="chap-divider-title">Ethics &amp; Professionalism of Emerging Technologies</div>
+</div>
+
+<!-- ══════════ SEC 1 ══ -->
+<section class="lec-section lec-1" id="ch8-sec1">
+<div class="lec-banner">
+  <div class="lec-banner-num">Section 1</div>
+  <div class="lec-banner-title">Technology &amp; Ethics</div>
+  <div class="lec-banner-sub">The Internet's Double Edge · New Ethical Questions · Ethics Arriving Too Late</div>
+</div>
+<div style="padding: 0.5rem 0 0;">
+
+<div class="sec">
+  <div class="sec-title">Technology's double edge</div>
+  <div class="card"><div class="card-body">The internet boom enabled new tools and new ways for people to interact, but it wasn't without downsides: it raised new privacy concerns, got hampered by spam and viruses, and while it connects people globally, it also threatens to cut off those who lack access to it (digital divide).</div></div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">Technology can promote or restrict human rights</div>
+  <div class="card"><div class="card-body">The information society should foster emerging technology use to maximize benefits while minimizing harms. This requires a proper legal/regulatory system to ensure technology capable of abuse isn't actually abused, and that the benefits of technology are shared among all, not concentrated.</div></div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">5 basic principles of professional ethics codes</div>
+  <div class="cards">
+    <div class="card"><div class="card-body">Integrity</div></div>
+    <div class="card"><div class="card-body">Objectivity</div></div>
+    <div class="card"><div class="card-body">Competence and due care</div></div>
+    <div class="card"><div class="card-body">Confidentiality</div></div>
+    <div class="card"><div class="card-body">Professional behavior</div></div>
+  </div>
+  <div class="exam-note">Emerging technologies raise new challenges against these five — they didn't disappear, but applying them gets harder with AI/big data involved.</div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">New ethical questions ← direct review Q</div>
+  <div class="card"><div class="card-body">Big data, algorithmic decision-making, and AI enable consistent, evidence-based, fast and efficient decisions. But this strength has a darker side:</div></div>
+  <div class="cards cards-2" style="margin-top:8px;">
+    <div class="card"><div class="tag tag-e">Biased outputs</div><div class="card-body">Outputs can be based on biased data, leading to discriminatory outcomes.</div></div>
+    <div class="card"><div class="tag tag-e">Recreating the past</div><div class="card-body">Systems that learn from real-world data risk simply recreating the past, building in old errors or systemic biases.</div></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">Human-machine interaction questions</div>
+  <div class="card" style="padding:1rem;">
+    <div class="process-row"><div class="process-num">1</div><div class="process-content">How much reliance can be placed on data and models?</div></div>
+    <div class="process-row"><div class="process-num">2</div><div class="process-content">What is the role of human judgement?</div></div>
+    <div class="process-row"><div class="process-num">3</div><div class="process-content">How do we ensure we understand the decision-making process (not a black box)?</div></div>
+  </div>
+  <div class="exam-note">Whatever the power of machines, humans must still be involved — so people can be held accountable, or explain the reasons behind a decision.</div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">Ethics arrives too late ← key conceptual point</div>
+  <div class="card"><div class="card-body">A central problem: ethics of technology tends to arrive too late. Ethical issues are often only recognized once the technology is already on the market and problems arise during widespread usage. Ethics has traditionally been poorly equipped to deal with uncertainty, especially <i>future</i> uncertainty — exactly the condition emerging tech operates in.</div></div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">Key terms to know</div>
+  <div>
+    <span class="pill pill-blue">Digital divide</span><span class="pill pill-blue">Information society</span><span class="pill pill-blue">5 ethics principles</span><span class="pill pill-blue">Algorithmic bias</span><span class="pill pill-blue">Black box decision-making</span><span class="pill pill-blue">Ethics arriving too late</span>
+  </div>
+</div>
+
+</div>
+</section>
+
+<!-- ══════════ SEC 2 ══ -->
+<section class="lec-section lec-2" id="ch8-sec2">
+<div class="lec-banner">
+  <div class="lec-banner-num">Section 2</div>
+  <div class="lec-banner-title">Ethical Principles, Responsibilities &amp; Leadership</div>
+  <div class="lec-banner-sub">3 Levels of Responsibility — Individual, Professional, Leadership</div>
+</div>
+<div style="padding: 0.5rem 0 0;">
+
+<div class="sec">
+  <div class="sec-title">The 3-column framework ← direct review Q, very examinable</div>
+  <div class="card"><div class="card-body">Common ethical principles, professional responsibilities, and professional leadership principles applicable across all technologies. Think of it as three escalating levels of duty: what an individual should value, what a professional should do, and what a leader should ensure.</div></div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">Full comparison table (from lecture slide)</div>
+  <div class="card" style="padding:0;">
+    <table class="mini">
+      <tr><th>Ethical Principles</th><th>Professional Responsibilities</th><th>Professional Leadership</th></tr>
+      <tr><td>Contribute to society &amp; human well-being; all people are stakeholders in computing.</td><td>Strive to achieve high quality in both processes and products of professional work.</td><td>Ensure the public good is the central concern in all professional computing work.</td></tr>
+      <tr><td>Avoid harm.</td><td>Maintain high standards of professional competence, conduct, and ethical practice.</td><td>Manage personnel and resources to enhance quality of working life.</td></tr>
+      <tr><td>Be honest and trustworthy.</td><td>Know and respect existing rules pertaining to professional work.</td><td>Articulate, apply, and support policies/processes reflecting the Code's principles.</td></tr>
+      <tr><td>Be fair and take action not to discriminate.</td><td>Accept and provide appropriate professional review.</td><td>Create opportunities for members of the organization to grow as professionals.</td></tr>
+      <tr><td>Respect the work behind new ideas, inventions, creative works, and computing artifacts.</td><td>Perform work only in areas of competence.</td><td>Use care when modifying or retiring systems — interface changes, feature removal, and updates affect users' productivity and work quality.</td></tr>
+      <tr><td>Respect privacy.</td><td>Foster public awareness and understanding of computing, related technologies, and their consequences.</td><td>Recognize and take special care of systems integrated into the infrastructure of society.</td></tr>
+    </table>
+  </div>
+  <div class="exam-note">If a question gives you a scenario about a leader vs an individual employee, match the behavior to the correct column — leadership items are about managing others and systems; ethical principles are personal values; professional responsibilities are about your own work quality and competence boundaries.</div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">Key terms to know</div>
+  <div>
+    <span class="pill pill-teal">Ethical principles</span><span class="pill pill-teal">Professional responsibilities</span><span class="pill pill-teal">Professional leadership</span><span class="pill pill-teal">Competence boundary</span><span class="pill pill-teal">Public good</span>
+  </div>
+</div>
+
+</div>
+</section>
+
+<!-- ══════════ SEC 3 ══ -->
+<section class="lec-section lec-3" id="ch8-sec3">
+<div class="lec-banner">
+  <div class="lec-banner-num">Section 3</div>
+  <div class="lec-banner-title">Digital Privacy</div>
+  <div class="lec-banner-sub">Information · Communication · Individual Privacy + Principles</div>
+</div>
+<div style="padding: 0.5rem 0 0;">
+
+<div class="sec">
+  <div class="sec-title">What digital privacy is</div>
+  <div class="card"><div class="card-body">Digital Privacy refers to the protection of personally identifiable or business identifiable information collected through information collection activities or other sources. It's a collective term covering three sub-categories, and is often used in contexts advocating for individual and consumer privacy rights in digital spheres.</div></div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">3 sub-categories ← direct review Q</div>
+  <div class="cards">
+    <div class="card"><div class="tag tag-a">Information privacy</div><div class="card-body">The right to determine how your personally identifiable digital information is collected and used by companies. Laws vary by country — e.g. Malaysia's Personal Data Protection Act (PDPA).</div></div>
+    <div class="card"><div class="tag tag-b">Communication privacy</div><div class="card-body">The right to communicate digitally with the expectation of security. Communications can be intercepted or misdelivered without the sender knowing — often due to not reading the platform's privacy policy.</div></div>
+    <div class="card"><div class="tag tag-c">Individual privacy</div><div class="card-body">The right to exist freely online and choose what information you're exposed to. Breaches: unwanted ads/spam, viruses forcing unwanted actions — both interrupt a person's ability to exist digitally undisturbed.</div></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">Digital privacy principles (from lecture slide) ← direct review Q</div>
+  <div class="card" style="padding:0;">
+    <table class="mini">
+      <tr><th style="width:120px;">Principle</th><th>Explanation</th></tr>
+      <tr><td><b style="font-weight:500">Data minimization</b></td><td>Collect the minimal amount of information necessary from individuals/businesses, consistent with the organization's mission and legal requirements.</td></tr>
+      <tr><td><b style="font-weight:500">Transparency</b></td><td>Provide clear notice of the purpose of collection and use of identifiable information. Information won't be used for any other purpose unless authorized or mandated by law.</td></tr>
+      <tr><td><b style="font-weight:500">Accuracy</b></td><td>Information collected will be maintained sufficiently accurate, timely, and complete to protect the interests of individuals and businesses.</td></tr>
+      <tr><td><b style="font-weight:500">Security</b></td><td>Adequate physical and IT security measures implemented so collection, use, and maintenance of identifiable info are safeguarded, and info is destroyed promptly per approved records schedules.</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">Key terms to know</div>
+  <div>
+    <span class="pill pill-purple">Digital privacy</span><span class="pill pill-purple">Information privacy</span><span class="pill pill-purple">Communication privacy</span><span class="pill pill-purple">Individual privacy</span><span class="pill pill-purple">PDPA (Malaysia)</span><span class="pill pill-purple">Data minimization</span><span class="pill pill-purple">Transparency</span><span class="pill pill-purple">Accuracy</span><span class="pill pill-purple">Security</span>
+  </div>
+</div>
+
+</div>
+</section>
+
+<!-- ══════════ SEC 4 ══ -->
+<section class="lec-section lec-4" id="ch8-sec4">
+<div class="lec-banner">
+  <div class="lec-banner-num">Section 4</div>
+  <div class="lec-banner-title">Accountability &amp; Trust</div>
+  <div class="lec-banner-sub">The Paradox of Risk-Management Tools</div>
+</div>
+<div style="padding: 0.5rem 0 0;">
+
+<div class="sec">
+  <div class="sec-title">Why accountability &amp; trust matter</div>
+  <div class="card"><div class="card-body">Emerging tech creates far-reaching, rapid change, and brings new forms of risk. Understanding and mitigating these risks builds confidence in ET. ET can give businesses accuracy, better quality, and cost efficiencies in every sector, and can enhance trust in an organization's operations and financial processes — crucial for sustainable success.</div></div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">The paradox ← key conceptual point, very examinable</div>
+  <div class="card"><div class="card-body">The very solutions used to better manage risk, increase transparency, and build confidence are often themselves the source of new risk — risk that may go unnoticed. There's also a danger that relying on technology degrades people's willingness to judge and personally intervene, since they're not personally connected to the consumers and outcomes affected.</div></div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">Definition of accountability</div>
+  <div class="quote-block">The obligation of an organization or individual to account for its activities, accept responsibility for them, and disclose the results in a transparent manner.</div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">Key terms to know</div>
+  <div>
+    <span class="pill pill-amber">Accountability</span><span class="pill pill-amber">Trust</span><span class="pill pill-amber">The paradox of ET risk</span><span class="pill pill-amber">Unnoticed risk</span><span class="pill pill-amber">Personal connection to outcomes</span>
+  </div>
+</div>
+
+</div>
+</section>
+
+<!-- ══════════ SEC 5 ══ -->
+<section class="lec-section lec-5" id="ch8-sec5">
+<div class="lec-banner">
+  <div class="lec-banner-num">Section 5</div>
+  <div class="lec-banner-title">Threats &amp; Challenges</div>
+  <div class="lec-banner-sub">By Technology · By Risk Type</div>
+</div>
+<div style="padding: 0.5rem 0 0;">
+
+<div class="sec">
+  <div class="sec-title">Security as a constant challenge</div>
+  <div class="card"><div class="card-body">With technology moving fast, security has always been a challenge. Growing cyber and data security needs require security practitioners to focus on business needs for securing data, understanding security risk from a business perspective, and extensively interacting with the business community to understand what they actually need.</div></div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">Challenges in using ET, by technology ← direct review Q</div>
+  <div class="card" style="padding:0;">
+    <table class="mini">
+      <tr><th style="width:150px;">Technology</th><th>Challenge</th></tr>
+      <tr><td><b style="font-weight:500">Artificial Intelligence</b></td><td>Potential to replace human workers in higher-level jobs as machines get more "intelligent." Alternatively, AI can take over laborious/time-consuming tasks, freeing time for other work — e.g. doctors using diagnostic AI still analyze the data and make the final decision.</td></tr>
+      <tr><td><b style="font-weight:500">Robotics</b></td><td>Same job-loss risk as AI, intensified as automation moves from production lines into other business areas. As robots learn to teach themselves and each other, productivity rises, but so do ethical and cybersecurity concerns.</td></tr>
+      <tr><td><b style="font-weight:500">Internet of Things (IoT)</b></td><td>More connected devices (smartwatches, fitness trackers) generate increasing volumes of data. Companies must plan how this affects customer-facing applications, and address severe security implications from mass connectivity.</td></tr>
+      <tr><td><b style="font-weight:500">Big Data</b></td><td>Almost all the above technologies relate to big data. Huge volumes of daily data give better insight into customers and operations, but making that data understandable to humans is challenging — AI plays a growing role here.</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">Threats of ET — liability risks by technology ← direct review Q</div>
+  <div class="card"><div class="card-body">New &amp; emerging technologies pose significant opportunities for businesses, but also pose risks and questions — not only to businesses but to society as a whole.</div></div>
+  <div class="card" style="padding:0; margin-top:8px;">
+    <table class="mini">
+      <tr><th style="width:150px;">Risk Area</th><th>Description</th></tr>
+      <tr><td><b style="font-weight:500">Autonomous cars</b></td><td>A compelling option for future fleet cars, but companies could face claims related to bodily injury and property damage from crashes.</td></tr>
+      <tr><td><b style="font-weight:500">Wearables</b></td><td>Google Glass, Fitbit, and similar devices can expose companies to invasion-of-privacy claims that general liability or personal injury coverage may not have foreseen.</td></tr>
+      <tr><td><b style="font-weight:500">Drones</b></td><td>Risk ("turbulence") for manufacturers and organizations that fail to protect themselves against property damage, bodily injury, and errors and omissions claims.</td></tr>
+      <tr><td><b style="font-weight:500">Internet of Things (IoT)</b></td><td>Proliferation of sensors and cross-platform integration creates exposure to privacy invasion, bodily injury, and property damage — potentially connecting an organization to huge liabilities.</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">Key terms to know</div>
+  <div>
+    <span class="pill pill-coral">Security risk (business perspective)</span><span class="pill pill-coral">AI job displacement</span><span class="pill pill-coral">Robotics automation risk</span><span class="pill pill-coral">IoT data/security risk</span><span class="pill pill-coral">Big data interpretability</span><span class="pill pill-coral">Autonomous car liability</span><span class="pill pill-coral">Wearables privacy claims</span><span class="pill pill-coral">Drone liability</span>
+  </div>
+  <div class="exam-note">Notice the pattern: nearly every "threat" table pairs a technology with a liability/risk category (privacy invasion, bodily injury, property damage, errors/omissions). If asked to identify risks for a technology not explicitly listed, apply this same liability-category lens.</div>
+</div>
+
+</div>
+</section><div class="chap-divider">
+  <div class="chap-divider-tag">Chapter 12</div>
+  <div class="chap-divider-title">Avoiding Pitfalls of Emerging Technologies</div>
+</div>
+
+<!-- ══════════ SEC 1 ══ -->
+<section class="lec-section lec-1" id="ch12-sec1">
+<div class="lec-banner">
+  <div class="lec-banner-num">Section 1</div>
+  <div class="lec-banner-title">Common Traps Facing Established Firms</div>
+  <div class="lec-banner-sub">4 Traps that Disadvantage Incumbents</div>
+</div>
+<div style="padding: 0.5rem 0 0;">
+
+<div class="sec">
+  <div class="sec-title">The setup</div>
+  <div class="card"><div class="card-body">Established firms (incumbents) face common traps that put them at a disadvantage when emerging technologies (ETs) appear. These traps explain why big, successful companies often get beaten to the punch by newer rivals when a new technology shows up.</div></div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">4 traps that disadvantage incumbents ← direct review Q, very examinable</div>
+  <div class="cards cards-2">
+    <div class="card"><div class="tag tag-a">1. Delayed participation</div><div class="card-body">Waiting too long to get involved with the ET, often justified as "rational" caution under uncertainty.</div></div>
+    <div class="card"><div class="tag tag-b">2. Sticking with the familiar</div><div class="card-body">Choosing a known but possibly wrong technology path instead of the unfamiliar new one.</div></div>
+    <div class="card"><div class="tag tag-c">3. Reluctance to fully commit</div><div class="card-body">Investing half-heartedly because full commitment threatens existing profitable products.</div></div>
+    <div class="card"><div class="tag tag-d">4. Lack of persistence</div><div class="card-body">Giving up early when short-term financial results disappoint, even though new tech often needs a long gestation period.</div></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">Trap 1: Delayed participation</div>
+  <div class="card"><div class="card-body">High uncertainty makes "watch and wait" feel rational. Managers operate from mental models that impose order on unclear situations to make them more manageable. Delaying participation is only suitable for narrow applications not yet required by existing customers — early, immature iterations of most ETs are easy to dismiss (e.g. early electronic watches). The trap: this approach is not suitable once the technology starts to matter to existing customers.</div></div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">Trap 2: Sticking with the familiar</div>
+  <div class="card"><div class="card-body">The odds of picking a familiar but wrong technology path go up when:</div></div>
+  <div class="card" style="padding:1rem; margin-top:8px;">
+    <div class="process-row"><div class="process-num">1</div><div class="process-content">Past success reinforces established ways of problem-solving and decision-making, leading the firm to search only in areas closely related to its current skills and technologies.</div></div>
+    <div class="process-row"><div class="process-num">2</div><div class="process-content">The firm lacks in-house capability to fully appraise the new ET.</div></div>
+    <div class="process-row"><div class="process-num">3</div><div class="process-content">A proprietary mind-set gets in the way.</div></div>
+  </div>
+  <div class="card-body" style="margin-top:8px;">Sticking with the known becomes even more appealing — and riskier — when multiple technologies are advancing simultaneously. The most worrying choices are those where multiple competing versions are vying to become the dominant design, with firms competing to set the industry standard for lasting advantage.</div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">Trap 3: Reluctance to fully commit</div>
+  <div class="card"><div class="card-body">New ETs can cannibalize existing profitable products, which brings resistance from channel partners. This produces bold forecasts on one hand but timid choices on the other — investments are hard to justify under strict ROI criteria. Firms stay focused on meeting current customers' needs rather than serving new needs and new markets. The underlying issue: successful organisations are not naturally "ambidextrous" (skilled at both exploiting the old and exploring the new at once).</div></div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">Trap 4: Lack of persistence</div>
+  <div class="card"><div class="card-body">Facing pressure for quarterly results, firms soon lose patience with adverse outcomes. Missed forecasts and dashed hopes are commonly experienced during the gestation of new technologies that eventually succeed. Example: Knight Ridder, Inc. (a major U.S. newspaper company) repeatedly withdrew from early moves into ETs such as electronic publishing, online news, and interactive services in response to negative financial results.</div></div>
+  <div class="exam-note">If a scenario describes a firm pulling out of a promising ET after a few bad quarters, that's Trap 4 (lack of persistence) — not Trap 1, even though both involve hesitation. Persistence is about quitting after starting; delayed participation is about not starting at all.</div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">Key terms to know</div>
+  <div>
+    <span class="pill pill-blue">Incumbent firms</span><span class="pill pill-blue">Delayed participation</span><span class="pill pill-blue">Sticking with the familiar</span><span class="pill pill-blue">Proprietary mind-set</span><span class="pill pill-blue">Dominant design</span><span class="pill pill-blue">Reluctance to fully commit</span><span class="pill pill-blue">Ambidextrous organisation</span><span class="pill pill-blue">Lack of persistence</span><span class="pill pill-blue">Knight Ridder example</span>
+  </div>
+</div>
+
+</div>
+</section>
+
+<!-- ══════════ SEC 2 ══ -->
+<section class="lec-section lec-2" id="ch12-sec2">
+<div class="lec-banner">
+  <div class="lec-banner-num">Section 2</div>
+  <div class="lec-banner-title">Four Solutions to Avoid the Traps</div>
+  <div class="lec-banner-sub">Peripheral Vision · Learning Culture · Flexibility · Autonomy</div>
+</div>
+<div style="padding: 0.5rem 0 0;">
+
+<div class="sec">
+  <div class="sec-title">4 possible solutions ← direct review Q, very examinable</div>
+  <div class="cards cards-2">
+    <div class="card"><div class="tag tag-a">1. Widening peripheral (indirect) vision</div><div class="card-body">Looking beyond the obvious, direct signals to spot ETs that matter strategically.</div></div>
+    <div class="card"><div class="tag tag-b">2. Creating a learning culture</div><div class="card-body">Building organisational (not just individual) capacity to keep learning from weak signals.</div></div>
+    <div class="card"><div class="tag tag-c">3. Staying flexible in strategic ways</div><div class="card-body">Keeping commitments reversible so direction can change quickly when needed.</div></div>
+    <div class="card"><div class="tag tag-d">4. Providing organisational autonomy</div><div class="card-body">Separating the ET venture from the main corporation so it isn't held back by inertia.</div></div>
+  </div>
+  <div class="exam-note">Each solution maps roughly to one trap: peripheral vision counters delayed participation/sticking with the familiar; learning culture counters sticking with the familiar; flexibility counters reluctance to commit; autonomy counters all four by removing big-firm inertia.</div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">Solution 1: Widening peripheral (indirect) vision</div>
+  <div class="card"><div class="card-body">First, define which ETs are strategically significant. Strategic projection of an ET's performance potential entails more than a simple linear extrapolation into the future — firms need to estimate the rate of market adoption and the potential size of the market.</div></div>
+  <div class="card" style="padding:0; margin-top:8px;">
+    <table class="mini">
+      <tr><th style="width:170px;">Principle</th><th>Explanation</th></tr>
+      <tr><td><b style="font-weight:500">Paint the big picture</b></td><td>Address the issue of whether the potential market could be "big enough" to support development activities.</td></tr>
+      <tr><td><b style="font-weight:500">Use multiple methods</b></td><td>All market estimation methods are flawed or limited in some important respect — relying on just one is risky.</td></tr>
+      <tr><td><b style="font-weight:500">Focus on needs, not products</b></td><td>Prospective customers can't envision radically new products based on discontinuous innovations, so study the underlying need instead.</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">Solution 2: Creating a learning culture</div>
+  <div class="card"><div class="card-body">Keep learning — but the real challenge is collective (organisational) learning, not just individual learning. There's plenty of "noise" when diverse sources of information are flowing in, so the organisation needs learning capacity built around these characteristics:</div></div>
+  <div class="card" style="padding:1rem; margin-top:8px;">
+    <div class="process-row"><div class="process-num">1</div><div class="process-content"><span class="process-title">Encouraging openness</span> to diverse viewpoints — within and across organisational units.</div></div>
+    <div class="process-row"><div class="process-num">2</div><div class="process-content"><span class="process-title">Challenge the prevailing mind-set</span> — while facilitating the forgetting of outmoded approaches.</div></div>
+    <div class="process-row"><div class="process-num">3</div><div class="process-content"><span class="process-title">Experiment continually</span> — encourage and reward "well-intentioned" failure.</div></div>
+    <div class="process-row"><div class="process-num">4</div><div class="process-content"><span class="process-title">Deep dialog</span> — master the skills of strategic conversation.</div></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">Solution 3: Staying flexible in strategic ways</div>
+  <div class="card"><div class="card-body">The greater the organisation's flexibility, the lower the cost of making a commitment — and the lower the cost of reversing direction. The one downside: too much flexibility may reduce the strategic signaling value of a commitment, which truly requires irreversibility to be credible to rivals and the market. Flexibility needs to be balanced within an options perspective — study rivals intently, and change direction boldly and quickly when needed.</div></div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">Solution 4: Providing organisational autonomy</div>
+  <div class="card"><div class="card-body">Take the ET business outside the main corporation into a separate unit. A separate unit is less held back by inertia, controls, risk-avoidance, and the big-firm mindset that leads to the four traps discussed earlier. Autonomy can have many degrees of separation — up to creating new spin-offs: newly formed companies with their own stock, board, and management team, with the parent retaining some ownership.</div></div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">Key terms to know</div>
+  <div>
+    <span class="pill pill-teal">Peripheral vision</span><span class="pill pill-teal">Strategic significance of ET</span><span class="pill pill-teal">Paint the big picture</span><span class="pill pill-teal">Multiple methods</span><span class="pill pill-teal">Focus on needs not products</span><span class="pill pill-teal">Collective/organisational learning</span><span class="pill pill-teal">Well-intentioned failure</span><span class="pill pill-teal">Strategic flexibility</span><span class="pill pill-teal">Options perspective</span><span class="pill pill-teal">Organisational autonomy</span><span class="pill pill-teal">Spin-offs</span>
+  </div>
+</div>
+
+</div>
+</section>
+
+<!-- ══════════ SEC 3 ══ -->
+<section class="lec-section lec-3" id="ch12-sec3">
+<div class="lec-banner">
+  <div class="lec-banner-num">Section 3</div>
+  <div class="lec-banner-title">An Uncertain Future</div>
+  <div class="lec-banner-sub">Why Firms Stand Paralyzed · Why Experts Get It Wrong</div>
+</div>
+<div style="padding: 0.5rem 0 0;">
+
+<div class="sec">
+  <div class="sec-title">Even the experts get it wrong ← memorable exam quote</div>
+  <div class="quote-block">"I think there is world market for about five computers" — <b>Thomas J. Watson, Chairman of IBM, 1943</b></div>
+  <div class="card" style="margin-top:8px;"><div class="card-body">Most seasoned experts on a technology have been dead wrong about its future. The real challenge isn't to draw a single, confident future — it's to construct a vision of many possible futures. Often, well-known existing technologies are combined in new ways to recreate innovations, rather than something coming from nowhere.</div></div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">Why firms stand paralyzed in the face of uncertainty ← direct review Q</div>
+  <div class="cards cards-2">
+    <div class="card"><div class="tag tag-e">Failure of imagination</div><div class="card-body">An inability to make sense of weak signals that don't fit traditional frames of mind.</div></div>
+    <div class="card"><div class="tag tag-e">Failure of leadership</div><div class="card-body">The mind can only see what it is prepared to see — leadership doesn't push the organisation to look further.</div></div>
+  </div>
+  <div class="card-body" style="margin-top:8px;">Ways to overcome this: recognize opportunities faster than rivals, and use good scenarios to help overcome strategic myopia and frame blindness.</div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">Key terms to know</div>
+  <div>
+    <span class="pill pill-purple">Uncertain future</span><span class="pill pill-purple">Thomas J. Watson quote</span><span class="pill pill-purple">Multiple futures</span><span class="pill pill-purple">Failure of imagination</span><span class="pill pill-purple">Failure of leadership</span><span class="pill pill-purple">Weak signals</span><span class="pill pill-purple">Strategic myopia</span><span class="pill pill-purple">Frame blindness</span>
+  </div>
+</div>
+
+</div>
+</section>
+
+<!-- ══════════ SEC 4 ══ -->
+<section class="lec-section lec-4" id="ch12-sec4">
+<div class="lec-banner">
+  <div class="lec-banner-num">Section 4</div>
+  <div class="lec-banner-title">The Power of Scenario Planning</div>
+  <div class="lec-banner-sub">Addressing Uncertainty, Complexity &amp; Paradigm Shift</div>
+</div>
+<div style="padding: 0.5rem 0 0;">
+
+<div class="sec">
+  <div class="sec-title">What scenario planning addresses ← direct review Q, very examinable</div>
+  <div class="card" style="padding:0;">
+    <table class="mini">
+      <tr><th style="width:140px;">Challenge</th><th>Explanation</th></tr>
+      <tr><td><b style="font-weight:500">Uncertainty</b></td><td>Need to distinguish this from any form of risk that can be quantified using objective probabilities — uncertainty can't be neatly assigned a probability.</td></tr>
+      <tr><td><b style="font-weight:500">Complexity</b></td><td>Forces range from social to technological to economic — scenario planning explores how they combine, intermingle, and dynamically influence one another.</td></tr>
+      <tr><td><b style="font-weight:500">Paradigm shift</b></td><td>Scenarios aim to challenge the prevailing mind-set, not just confirm it.</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">Why "scenario planning" is a good tool ← direct review Q</div>
+  <div class="cards">
+    <div class="card"><div class="card-body">Allows organisations to examine the interaction between technology and market.</div></div>
+    <div class="card"><div class="card-body">Visualizes the impact of technological discontinuities on the organisation's existing models.</div></div>
+    <div class="card"><div class="card-body">Helps enhance budgeting and resource allocation processes within the firm.</div></div>
+    <div class="card"><div class="card-body">Helps managers better understand the commercial potential of an ET.</div></div>
+    <div class="card"><div class="card-body">Allows organisations to better understand which technology to invest its resources in.</div></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">Analyzing weak signals</div>
+  <div class="card"><div class="card-body">Scenarios can amplify weak signals. Minor "speciation" events can later produce profound changes in an industry's development. Scenario planning helps track events and make sense of new events as they emerge — catching shifts before they're obvious to everyone.</div></div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">Key terms to know</div>
+  <div>
+    <span class="pill pill-amber">Scenario planning</span><span class="pill pill-amber">Uncertainty vs quantifiable risk</span><span class="pill pill-amber">Complexity of forces</span><span class="pill pill-amber">Paradigm shift</span><span class="pill pill-amber">Technology-market interaction</span><span class="pill pill-amber">Technological discontinuities</span><span class="pill pill-amber">Weak signal amplification</span><span class="pill pill-amber">Speciation events</span>
+  </div>
+</div>
+
+</div>
+</section>
+
+<!-- ══════════ SEC 5 ══ -->
+<section class="lec-section lec-5" id="ch12-sec5">
+<div class="lec-banner">
+  <div class="lec-banner-num">Section 5</div>
+  <div class="lec-banner-title">Constructing Scenarios</div>
+  <div class="lec-banner-sub">Step-by-Step Process · Common Traps to Avoid</div>
+</div>
+<div style="padding: 0.5rem 0 0;">
+
+<div class="sec">
+  <div class="sec-title">Steps for constructing scenarios ← direct review Q, very examinable</div>
+  <div class="card" style="padding:1rem;">
+    <div class="process-row"><div class="process-num">1</div><div class="process-content">Define the issues you want to understand.</div></div>
+    <div class="process-row"><div class="process-num">2</div><div class="process-content">Identify the major stakeholders and actors.</div></div>
+    <div class="process-row"><div class="process-num">3</div><div class="process-content">Identify and study the main forces shaping the future (use STEEP: Social, Technological, Economic, Environmental, Political).</div></div>
+    <div class="process-row"><div class="process-num">4</div><div class="process-content">Identify trends or predetermined elements that will affect the issues.</div></div>
+    <div class="process-row"><div class="process-num">5</div><div class="process-content">Identify the key uncertainties from the list of main forces.</div></div>
+    <div class="process-row"><div class="process-num">6</div><div class="process-content">Select the two most important key uncertainties.</div></div>
+    <div class="process-row"><div class="process-num">7</div><div class="process-content">Assess the internal consistency and plausibility of the initial learning scenarios.</div></div>
+    <div class="process-row"><div class="process-num">8</div><div class="process-content">Assess the revised scenarios in terms of how key stakeholders might behave in them.</div></div>
+    <div class="process-row"><div class="process-num">9</div><div class="process-content">Reexamine the internal consistencies of the learning scenarios.</div></div>
+    <div class="process-row"><div class="process-num">10</div><div class="process-content">Reassess the uncertainty ranges of the main variables of interest.</div></div>
+  </div>
+  <div class="exam-note">STEEP (Social, Technological, Economic, Environmental, Political) is the acronym used at Step 3 to identify the main forces shaping the future — likely to appear as a direct recall question.</div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">Traps to avoid in scenario planning itself ← direct review Q</div>
+  <div class="card"><div class="card-body">Scenario planning is unfamiliar territory for many managers, so there are pitfalls in doing it badly:</div></div>
+  <div class="cards cards-2" style="margin-top:8px;">
+    <div class="card"><div class="tag tag-f">Failing to get top management support early on</div></div>
+    <div class="card"><div class="tag tag-f">Lack of diverse inputs</div></div>
+    <div class="card"><div class="tag tag-f">Failure to stimulate new strategic options</div></div>
+    <div class="card"><div class="tag tag-f">Not tracking the scenarios' progress &amp; performance</div></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">Key terms to know</div>
+  <div>
+    <span class="pill pill-sky">Constructing scenarios</span><span class="pill pill-sky">STEEP analysis</span><span class="pill pill-sky">Key uncertainties</span><span class="pill pill-sky">Learning scenarios</span><span class="pill pill-sky">Internal consistency</span><span class="pill pill-sky">Top management support</span><span class="pill pill-sky">Diverse inputs</span><span class="pill pill-sky">Strategic options</span>
+  </div>
+</div>
+
+</div>
+</section>
+
+<!-- ══════════ SEC 6 ══ -->
+<section class="lec-section lec-6" id="ch12-sec6">
+<div class="lec-banner">
+  <div class="lec-banner-num">Section 6</div>
+  <div class="lec-banner-title">Surrogate Crisis, Learning &amp; Decision Scenarios — Conclusion</div>
+  <div class="lec-banner-sub">From Learning Scenarios to Decision Scenarios</div>
+</div>
+<div style="padding: 0.5rem 0 0;">
+
+<div class="sec">
+  <div class="sec-title">Scenario planning as a "surrogate crisis" ← key conceptual point</div>
+  <div class="card"><div class="card-body">A real crisis is expensive and often too late to survive. An imagined crisis (scenario) can elicit similar responses to a real crisis, depicting threats and opportunities in vivid detail. This requires an artful balancing of the known and the unknown — enough realism to provoke a genuine reaction, without pretending to predict the unpredictable.</div></div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">From learning scenarios to decision scenarios</div>
+  <div class="card"><div class="card-body">Resistance to new ideas can be reduced if scenarios are treated as learning opportunities rather than predictions. Once learning scenarios are revised and accepted, they can serve as decision scenarios:</div></div>
+  <div class="cards" style="margin-top:8px;">
+    <div class="card"><div class="card-body">Generate new insights about the future environment, so organisations can craft more effective strategies and plans.</div></div>
+    <div class="card"><div class="card-body">Provide a powerful framework for analysing complex and uncertain challenges.</div></div>
+    <div class="card"><div class="card-body">Prepare the organisation not for one single future, but for many uncertainties.</div></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">Chapter conclusion ← direct review Q</div>
+  <div class="card"><div class="card-body">For established firms to compete, survive, and succeed in industries created or transformed by ETs, they need: senior management support, separation of the new venture from continuing activities, organisational and strategic flexibility, willingness to take risks and learn from experiments, and diverse viewpoints to challenge dominant mind-sets, misleading precedents, and myopic (narrow-minded) views of new ventures.</div></div>
+  <div class="card" style="margin-top:8px;"><div class="card-body">The 4 traps and 4 solutions covered are not exhaustive — but being aware of them, and tailoring the solutions, helps a firm learn from others' mistakes instead of repeating them. Initiating a scenario planning exercise helps prepare an organisation for real-world situations by building understanding of the benefits of scenario planning and the methods to initiate it.</div></div>
+</div>
+
+<div class="divider"></div>
+<div class="sec">
+  <div class="sec-title">Key terms to know</div>
+  <div>
+    <span class="pill pill-blue">Surrogate crisis</span><span class="pill pill-blue">Learning scenarios</span><span class="pill pill-blue">Decision scenarios</span><span class="pill pill-blue">Senior management support</span><span class="pill pill-blue">Strategic flexibility</span><span class="pill pill-blue">Myopic views</span><span class="pill pill-blue">Misleading precedents</span>
+  </div>
+  <div class="exam-note">Tie the conclusion back to Sections 1 &amp; 2: every item in the conclusion's "requirements list" maps to undoing one of the 4 traps (e.g. "separation of the new venture" = organisational autonomy; "willingness to take risks" = countering reluctance to fully commit).</div>
+</div>
+
+</div>
+</section></main>
+
+<script>
+  const sections = document.querySelectorAll('.lec-section');
+  const links = document.querySelectorAll('.sidenav a');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const a = document.querySelector(`.sidenav a[href="#${e.target.id}"]`);
+        if (a) a.classList.add('active');
+      }
+    });
+  }, { threshold: 0.15 });
+  sections.forEach(s => obs.observe(s));
+</script>
+</body>
+</html>
